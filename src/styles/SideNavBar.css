@@ -1,0 +1,10 @@
+.side-bar {
+    color: white;
+    background-color: black;
+    position: fixed;
+    height: 100%;
+    width: 250px;
+    z-index: 1;
+}
+
+

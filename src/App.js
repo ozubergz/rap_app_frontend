@@ -3,14 +3,13 @@ import ArtistContainer from './containers/ArtistContainer';
 import SideBar from './components/SideBar';
 import ArtistPage from './components/ArtistPage';
 import { Route, Switch } from "react-router";
-import { BrowserRouter as Router } from "react-router-dom";
-
 import './styles/App.css';
 
 class App extends React.Component {
 
   state = {
-    artists: []
+    artists: [],
+    artist: null
   }
 
   componentDidMount() {
@@ -26,17 +25,17 @@ class App extends React.Component {
   artistPage = (renderProps) => {
     let id = renderProps.match.params.id;
     let artist = this.state.artists.find(artist => artist.id === Number(id));
-    return <ArtistPage artist={artist} />
+    return <ArtistPage artist={artist} id={id}/>
   }
 
   render() {
     return (
       <div className="App">
           <SideBar />
-          <Router>
+          <Switch>
             <Route exact path="/" render={ this.mainPage }  />
             <Route path="/artist/:id" render={ this.artistPage } />            
-          </Router>
+          </Switch>
       </div>
     );
   }

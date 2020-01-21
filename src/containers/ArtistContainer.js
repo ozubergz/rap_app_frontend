@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Artist from '../components/Artist';
-import '../styles/ArtistContainer.css';
 import { Grid } from 'semantic-ui-react';
 import uuid from 'uuid';
+import '../styles/ArtistContainer.css';
 
 class ArtistsContainer extends Component {
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import '../styles/Artist.css'
 import { Grid } from 'semantic-ui-react'
+import { Link } from 'react-router-dom';
 
 const Artist = (props) => {
 
@@ -13,11 +14,8 @@ const Artist = (props) => {
 
     return (
         <Grid.Column>
-            <div className="artist-card" >
-                <div className="artist-img" style={imgStyle}>
-                    
-                    <div className="artist-name">{props.artist.name}</div>
-                </div>
+            <div className="artist-img" style={imgStyle} >
+                <Link className="link" to={`/artist/${props.artist.id}`}></Link>
             </div>
         </Grid.Column>
     )

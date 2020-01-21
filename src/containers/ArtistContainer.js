@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import Artist from '../components/Artist';
 import '../styles/ArtistContainer.css';
-import { Grid, Container } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 import uuid from 'uuid';
 
 class ArtistsContainer extends Component {
 
     renderArtistList = () => {
-        return this.props.artists.map(artist => <Artist key={uuid()} artist={artist} />)
+        return this.props.artists.map(artist => <Artist key={uuid()} artist={artist} />);
     }
 
     render() {

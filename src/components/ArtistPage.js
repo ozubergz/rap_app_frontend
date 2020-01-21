@@ -3,28 +3,7 @@ import '../styles/ArtistPage.css';
 
 class ArtistPage extends Component {
 
-    // state = {
-    //     artist: this.props.artist
-    // }
-
-    // componentDidMount() {
-    //     console.log(this.state.artist)
-    //     console.log('hello')
-    // }
-
-    // fetchArtist() {
-        // fetch("http://localhost:3000/api/artists")
-        // .then(res => res.json())
-        // .then(artists => {
-        //     let artist = artists.find(artist => {
-        //         return artist.id === Number(this.props.id)
-        //     });
-        //     this.setState({ artist });
-        // });
-    // }
-
     render() {
-                
         const imgStyle = {
             backgroundImage: `url(${this.props.artist.profile_pic})`,
             backgroundSize: "cover",

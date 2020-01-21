@@ -25,7 +25,7 @@ class App extends React.Component {
   artistPage = (renderProps) => {
     let id = renderProps.match.params.id;
     let artist = this.state.artists.find(artist => artist.id === Number(id));
-    return <ArtistPage artist={artist} id={id}/>
+    if(artist) return <ArtistPage artist={artist} id={id}/>
   }
 
   render() {

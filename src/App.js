@@ -9,13 +9,15 @@ class App extends React.Component {
 
   state = {
     artists: [],
-    artist: null
+    user: null
   }
 
   componentDidMount() {
     fetch("http://localhost:3000/api/artists")
     .then(res => res.json())
-    .then(artists => this.setState({ artists }))
+    .then(artists => this.setState({ artists }));
+
+    
   }
 
   mainPage = () => {

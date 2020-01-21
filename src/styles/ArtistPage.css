@@ -1,7 +1,43 @@
 .artist-page {
     color: white;
     margin-left: 280px;
+    padding: 2rem;
 }
 
+.artist-header {
+    display: flex;
+}
 
+.artist-left {
+    margin-right: 2rem;
+}
+
+.artist-info {
+    padding-top: 2rem;
+}
+
+.artist-pic {
+    position: relative;
+    width: 230px;
+    height: 230px;
+    border-radius: 100%;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+/* .comment-list {
+    background-color: gray;
+    margin-top: 1rem;
+} */
+
+.comment-body {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border-top: 1px solid rgb(94, 94, 94);
+}
+
+.username {
+    color: rgb(36, 197, 36);
+    margin-bottom: 1rem;
+}
 

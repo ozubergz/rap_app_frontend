@@ -6,6 +6,7 @@
     width: 250px;
     z-index: 1;
     padding: 1.5rem;
+    overflow-y: scroll;
 }
 
 .user-pic {
@@ -20,10 +21,16 @@
 
 .user-header {
     position: relative;
-    /* background-color: pink; */
     text-align: center;
+    /* background-color: pink; */
 }
 
 .user-pic {
     margin: auto;
+}
+
+.user-comments {
+    margin-top: 5rem;
+    padding-left: 25px;
+    /* background-color: pink; */
 }

@@ -18,6 +18,10 @@ class SideBar extends Component {
             return <div className="user-pic" style={imgStyle}></div>
         }
     }
+
+    renderUserComments() {
+        return this.props.user.comments.map(comment => <li>{comment.content}</li>)
+    }
     
     render() {
         return (
@@ -25,6 +29,12 @@ class SideBar extends Component {
                 <div className="user-header">
                     {this.renderUserPic()}
                     <h2>{this.props.user.username}</h2>
+                </div>
+                <div className="user-comments">
+                    <h5>Your Comments</h5>
+                    <div className="comment-list">
+                        {/* {this.renderUserComments()} */}
+                    </div>
                 </div>
             </div>
         );

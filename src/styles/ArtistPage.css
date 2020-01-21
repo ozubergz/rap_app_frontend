@@ -6,6 +6,7 @@
 
 .artist-header {
     display: flex;
+    margin-bottom: 1rem;
 }
 
 .artist-left {
@@ -34,5 +35,25 @@
 .username {
     color: rgb(36, 197, 36);
     margin-bottom: 1rem;
+}
+
+.ui.form {
+    margin-bottom: 4rem;
+}
+
+textarea {
+    height: 180px !important;
+}
+
+label {
+    color: white !important;
+}
+
+.button-group {
+    margin-top: 3rem;
+}
+
+.ui.green.button.icon.circular {
+    margin-right: 0.7rem;
 }
 

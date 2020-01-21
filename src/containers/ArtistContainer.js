@@ -7,7 +7,9 @@ import '../styles/ArtistContainer.css';
 class ArtistsContainer extends Component {
 
     renderArtistList = () => {
-        return this.props.artists.map(artist => <Artist key={uuid()} artist={artist} />);
+        return this.props.artists.map(artist => {
+           return <Artist key={uuid()} artist={artist} /> 
+        }) ;
     }
 
     render() {

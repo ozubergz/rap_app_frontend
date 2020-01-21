@@ -1,0 +1,29 @@
+.side-bar {
+    color: white;
+    background-color: black;
+    position: fixed;
+    height: 100%;
+    width: 250px;
+    z-index: 1;
+    padding: 1.5rem;
+}
+
+.user-pic {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    margin-bottom: 3rem;
+    text-align: center;
+    overflow: hidden;
+}
+
+.user-header {
+    position: relative;
+    /* background-color: pink; */
+    text-align: center;
+}
+
+.user-pic {
+    margin: auto;
+}

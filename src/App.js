@@ -17,7 +17,9 @@ class App extends React.Component {
     .then(res => res.json())
     .then(artists => this.setState({ artists }));
 
-    
+    fetch("http://localhost:3000/api/users/311")
+    .then(res => res.json())
+    .then(user => this.setState({ user }))
   }
 
   mainPage = () => {
@@ -30,10 +32,15 @@ class App extends React.Component {
     if(artist) return <ArtistPage artist={artist} id={id}/>
   }
 
+  renderSideBarUser() {
+    let user = this.state.user
+    if(user) return <SideBar user={this.state.user} />
+  }
+
   render() {
     return (
       <div className="App">
-          <SideBar />
+          {this.renderSideBarUser()}
           <Switch>
             <Route exact path="/" render={ this.mainPage }  />
             <Route path="/artist/:id" render={ this.artistPage } />            

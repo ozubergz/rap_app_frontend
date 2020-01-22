@@ -61,27 +61,31 @@ class App extends React.Component {
   handleAddArtist = (artist) => {
     let artist_id = artist.id;
     let user_id = this.state.user.id;
-    
-    fetch("http://localhost:3000/top_lists", {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ user_id, artist_id })
-    })
-    .then(res => res.json())
-    .then(newData => {
-      let user = {...this.state.user};
-      
-      let newFavorite = { 
-        id: newData.id, 
-        user_id: newData.user.id, 
-        artist_id: newData.artist.id
-      }
 
-      user.top_list.push(newFavorite);
-      this.setState({ user });
-    });
+    let artistIds = this.state.user.top_list.map(list => list.artist_id);
+
+    if(!artistIds.includes(artist_id)) {
+      fetch("http://localhost:3000/top_lists", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ user_id, artist_id })
+      })
+      .then(res => res.json())
+      .then(newData => {
+        let user = {...this.state.user};
+        
+        let newFavorite = { 
+          id: newData.id, 
+          user_id: newData.user.id, 
+          artist_id: newData.artist.id
+        }
+
+        user.top_list.push(newFavorite);
+        this.setState({ user });
+      });
+    }    
   }
 
   mainPage = () => {
@@ -117,7 +121,6 @@ class App extends React.Component {
   
 
   render() {
-
     return (
       <div className="App">
           {this.renderSideBarUser()}

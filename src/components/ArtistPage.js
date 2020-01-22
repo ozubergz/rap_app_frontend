@@ -54,6 +54,7 @@ class ArtistPage extends Component {
                                     <i className="plus icon"></i>
                                 </button>
                                 <button 
+                                    onClick={() => this.props.handleRemoveArtist(this.props.artist)}
                                     className="ui red button icon circular">
                                     <i className="minus icon"></i>
                                 </button>

@@ -88,6 +88,26 @@ class App extends React.Component {
     }    
   }
 
+  handleRemoveArtist = (artist) => {
+    let artist_id = artist.id;
+    let topList = this.state.user.top_list;
+    let user = this.state.user
+
+    let foundList = topList.find(list => list.artist_id === artist_id);
+    
+    if(foundList) {
+      fetch(`http://localhost:3000/top_lists/${foundList.id}`, {
+        method: "DELETE"
+      })
+      .then(res => res.json())
+      .then(deletedList => {
+        topList = topList.filter(list => list.id !== deletedList.id);
+        user.top_list = topList;
+        this.setState({ user });
+      }); 
+    }
+  }
+
   mainPage = () => {
     return <ArtistContainer artists={this.state.artists} /> 
   }
@@ -103,8 +123,10 @@ class App extends React.Component {
                         value={this.state.value}
                         handleSubmitComment={this.handleSubmitComment}
                         handleCommment={this.handleCommment} 
+                        handleRemoveArtist={this.handleRemoveArtist}
                         handleAddArtist={this.handleAddArtist}
-                        artist={artist} id={id}
+                        artist={artist} 
+                        id={id}
                       />
   }
 
@@ -117,8 +139,6 @@ class App extends React.Component {
                       user={this.state.user}
                     />
   }
-
-  
 
   render() {
     return (

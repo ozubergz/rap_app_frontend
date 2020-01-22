@@ -41,12 +41,11 @@ class App extends React.Component {
         body: JSON.stringify({ content, artist_id, user_id}) 
       })
       .then(res => res.json())
-      .then(newData => {
-
+      .then(newComment => {
         let artists = [...this.state.artists];
         
         artists.map(artist => {
-          if (artist.id === newData.artist.id) artist.comments.push(newData);
+          if (artist.id === newComment.artist.id) artist.comments.push(newComment);
           return artist;
         });
         
@@ -69,7 +68,15 @@ class App extends React.Component {
     .then(res => res.json())
     .then(newData => {
       let user = {...this.state.user};
-      user.top_list.push(newData)
+      
+      let newFavorite = { 
+        id: newData.id, 
+        user_id: newData.user.id, 
+        artist_id: newData.artist.id
+      }
+
+      user.top_list.push(newFavorite);
+      this.setState({ user });
     });
   }
 
@@ -91,7 +98,7 @@ class App extends React.Component {
 
   renderSideBarUser() {
     let user = this.state.user
-    if(user) return <SideBar user={this.state.user} />
+    if(user) return <SideBar artists={this.state.artists} user={this.state.user} />
   }
 
   render() {

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Image } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 import unknownPic from '../images/unknown_pic.png';
+import uuid from 'uuid';
 import '../styles/SideBar.css';
 
 class SideBar extends Component {
@@ -20,7 +22,34 @@ class SideBar extends Component {
     }
 
     renderUserComments() {
-        return this.props.user.comments.map(comment => <li>{comment.content}</li>)
+        return this.props.user.comments.map(comment => <div key={uuid()} className="comment-li">{comment.content}</div>)
+    }
+
+    renderTopList() {
+        let artistIDS = this.props.user.top_list.map(list => list.artist_id);
+        let filteredArtists = this.props.artists.filter(artist => {
+            let artistPic;
+            artistIDS.forEach(id => {
+                if(artist.id === id) artistPic = artist
+            });
+            return artistPic;
+        });
+
+        return filteredArtists.map(artist => {
+
+            const imgStyle = {
+                backgroundImage: `url(${artist.profile_pic})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat"
+            }
+
+           return (
+               <Grid.Column key={uuid()} className="favorite-list-columns">
+                   <div className="favorite-list-pics" style={imgStyle}></div>
+               </Grid.Column>
+            )
+        });
     }
     
     render() {
@@ -31,10 +60,18 @@ class SideBar extends Component {
                     <h2>{this.props.user.username}</h2>
                 </div>
                 <div className="user-comments">
-                    <h5>Your Comments</h5>
-                    <div className="comment-list">
-                        {/* {this.renderUserComments()} */}
+                    <h5>COMMENTS</h5>
+                    <div className="comment-ul">
+                        {this.renderUserComments()}
                     </div>
+                </div>
+                <h5 className="favorite-lbl">FAVORITES</h5>
+                <div className="favorite-box">
+                    <Grid>
+                        <Grid.Row columns={2}>
+                            {this.renderTopList()}
+                        </Grid.Row>
+                    </Grid>
                 </div>
             </div>
         );

@@ -10,6 +10,7 @@ class App extends React.Component {
   state = {
     artists: [],
     value: "",
+    showComments: false,
     user: null
   }
 
@@ -31,7 +32,7 @@ class App extends React.Component {
     let content = this.state.value;
     let artist_id = artist.id;
     let user_id = this.state.user.id;
-    
+
     if(content.length !== "") {
       fetch("http://localhost:3000/comments", {
         method: 'POST',
@@ -42,14 +43,17 @@ class App extends React.Component {
       })
       .then(res => res.json())
       .then(newComment => {
-        let artists = [...this.state.artists];
+        let artists = [ ...this.state.artists ];
+        let user = { ...this.state.user };
         
         artists.map(artist => {
           if (artist.id === newComment.artist.id) artist.comments.push(newComment);
           return artist;
         });
+
+        user.comments.push(newComment)
         
-        this.setState({ value: "", artists })
+        this.setState({ value: "", artists, user })
       });
     }
   }
@@ -84,6 +88,10 @@ class App extends React.Component {
     return <ArtistContainer artists={this.state.artists} /> 
   }
 
+  toggleShowComment = () => {
+    this.setState({ showComments: !this.state.showComments})
+  }
+
   artistPage = (renderProps) => {
     let id = renderProps.match.params.id;
     let artist = this.state.artists.find(artist => artist.id === Number(id));
@@ -98,11 +106,18 @@ class App extends React.Component {
 
   renderSideBarUser() {
     let user = this.state.user
-    if(user) return <SideBar artists={this.state.artists} user={this.state.user} />
+    if(user) return <SideBar
+                      showComments={this.state.showComments}
+                      toggleShowComment={this.toggleShowComment}
+                      artists={this.state.artists} 
+                      user={this.state.user}
+                    />
   }
 
+  
+
   render() {
-    
+
     return (
       <div className="App">
           {this.renderSideBarUser()}

@@ -60,10 +60,25 @@ class SideBar extends Component {
                     <h2>{this.props.user.username}</h2>
                 </div>
                 <div className="user-comments">
-                    <h5>COMMENTS</h5>
-                    <div className="comment-ul">
-                        {this.renderUserComments()}
-                    </div>
+                    {
+                        this.props.showComments ? 
+                        <button onClick={this.props.toggleShowComment} className="show-comments">
+                            LESS COMMENTS <i className="caret square down green icon"></i>
+                        </button> :
+                        <button onClick={this.props.toggleShowComment} className="show-comments">
+                            SHOW COMMENTS <i className="caret square up green icon"></i>
+                        </button> 
+                    }
+
+                    {
+                        this.props.showComments ?
+                        <div className="comment-ul">
+                            {this.renderUserComments()}
+                        </div> : 
+                        null
+                    }
+                    
+                    
                 </div>
                 <h5 className="favorite-lbl">FAVORITES</h5>
                 <div className="favorite-box">

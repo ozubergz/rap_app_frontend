@@ -64,3 +64,17 @@
     padding-right: 0;
 }
 
+.show-comments {
+    margin-bottom: 0.5em;
+    background: none;
+    color: white;
+    padding: 0;
+    border: none;
+    outline: 0;
+    font-weight: 800;
+}
+
+.show-comments:hover {
+    cursor: pointer;
+}
+

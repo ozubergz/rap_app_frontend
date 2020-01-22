@@ -2,6 +2,7 @@ import React from 'react';
 import ArtistContainer from './containers/ArtistContainer';
 import SideBar from './components/SideBar';
 import ArtistPage from './components/ArtistPage';
+import SignUp from './components/SignUp';
 import { Route, Switch } from "react-router";
 import './styles/App.css';
 
@@ -11,7 +12,9 @@ class App extends React.Component {
     artists: [],
     value: "",
     showComments: false,
-    user: null
+    user: null,
+    username: "",
+    password: ""
   }
 
   componentDidMount() {
@@ -108,9 +111,9 @@ class App extends React.Component {
     }
   }
 
-  mainPage = () => {
-    return <ArtistContainer artists={this.state.artists} /> 
-  }
+  // mainPage = () => {
+  //   return <ArtistContainer artists={this.state.artists} /> 
+  // }
 
   toggleShowComment = () => {
     this.setState({ showComments: !this.state.showComments})
@@ -130,20 +133,54 @@ class App extends React.Component {
                       />
   }
 
-  renderSideBarUser() {
-    let user = this.state.user
-    if(user) return <SideBar
-                      showComments={this.state.showComments}
-                      toggleShowComment={this.toggleShowComment}
-                      artists={this.state.artists} 
-                      user={this.state.user}
-                    />
+  handleSignUpInputs = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
   }
+
+  handleCreateUser = () => {
+    let username = this.state.username;
+    let password = this.state.password;
+    fetch('http://localhost:3000/api/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+    },
+      body: JSON.stringify({ 
+        username, 
+        password, 
+        profile_pic: null
+      })
+    })
+    .then(r => r.json())
+    .then(newUser => this.setState({user: newUser}))
+
+  }
+
+  // renderSideBarUser() {
+  //   let user = this.state.user
+  //   if(user) return <SideBar
+  //                     showComments={this.state.showComments}
+  //                     toggleShowComment={this.toggleShowComment}
+  //                     artists={this.state.artists} 
+  //                     user={this.state.user}
+  //                   />
+  // }
 
   render() {
     return (
       <div className="App">
-          {this.renderSideBarUser()}
+          {/* {this.renderSideBarUser()} */}
+          
+          <SignUp 
+            password={this.state.password}
+            username={this.state.username}
+            handleCreateUser={this.handleCreateUser}
+            handleSignUpInputs={this.handleSignUpInputs}
+          />
+          
           <Switch>
             <Route exact path="/" render={ this.mainPage }  />
             <Route path="/artist/:id" render={ this.artistPage } />            

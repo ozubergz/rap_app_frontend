@@ -56,12 +56,12 @@
 }
 
 .favorite-list-pics {
+    position: relative;
     width: 70px;
     height: 70px;
     border-radius: 100%;
     margin-bottom: 1rem;
     overflow: hidden;
-    padding-right: 0;
 }
 
 .show-comments {

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Image } from 'semantic-ui-react';
 import { Grid } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+
 import unknownPic from '../images/unknown_pic.png';
 import uuid from 'uuid';
 import '../styles/SideBar.css';
@@ -46,7 +48,9 @@ class SideBar extends Component {
 
            return (
                <Grid.Column key={uuid()} className="favorite-list-columns">
-                   <div className="favorite-list-pics" style={imgStyle}></div>
+                   <div className="favorite-list-pics" style={imgStyle}>
+                    <Link className="link" to={`/artist/${artist.id}`}></Link>
+                   </div>
                </Grid.Column>
             )
         });

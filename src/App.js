@@ -10,13 +10,17 @@ class App extends React.Component {
   state = {
     artists: [],
     value: "",
-    user: null
+    user: null,
+    searchValue: "",
+    searchResults: null
   }
 
   componentDidMount() {
     fetch("http://localhost:3000/api/artists")
     .then(res => res.json())
-    .then(artists => this.setState({ artists }));
+    .then(artists => this.setState({  
+      artists: artists
+    }));
 
     fetch("http://localhost:3000/api/users/311")
     .then(res => res.json())
@@ -73,9 +77,7 @@ class App extends React.Component {
     });
   }
 
-  mainPage = () => {
-    return <ArtistContainer artists={this.state.artists} /> 
-  }
+
 
   artistPage = (renderProps) => {
     let id = renderProps.match.params.id;
@@ -94,7 +96,32 @@ class App extends React.Component {
     if(user) return <SideBar user={this.state.user} />
   }
 
+  // handleFilter = (e) => {
+  //   let updatedList = this.state.artists.filter(function(artist){
+  //     return artist.name.toLowerCase().search(
+  //       e.target.value.toLowerCase()) !== -1;
+  //   });
+  //   this.setState({artists: updatedList});
+  // }
+
+  handleSearchOnChange = (event) => {
+    this.setState({
+      searchValue: (event.target.value),
+      searchResults: this.state.artists.filter(artist => artist.name.toLowerCase().includes(event.target.value))
+    })
+
+  }
+  
+
+  mainPage = () => {
+    return <ArtistContainer artistsToRender = {!this.state.searchResults ? this.state.artists : this.state.searchResults}
+    
+    artists={this.state.artists} handleSearchOnChange={this.handleSearchOnChange} searchValue={this.state.searchValue} /> 
+  }
+  
+
   render() {
+    console.log(this.state)
     
     return (
       <div className="App">

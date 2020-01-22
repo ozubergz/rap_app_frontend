@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container } from 'semantic-ui-react';
 import { Form } from 'semantic-ui-react'
+import { Link } from 'react-router-dom';
 import uuid from 'uuid';
 
 
@@ -13,16 +14,16 @@ class ArtistPage extends Component {
             return <h3>NO COMMENTS HERE...</h3>
         }
         return this.props.artist.comments.map(comment => { 
-           return (
+            return (
                 <div key={uuid()} className="comment-body">
                     <div className="username">
-                       {comment.user.username}
+                        {comment.user.username}
                     </div>
                     <div className="comment-content">
                         {comment.content}
                     </div>
                 </div>
-           )
+                )
         });
     }
 
@@ -33,6 +34,8 @@ class ArtistPage extends Component {
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat"
         }
+
+
 
         return (
             <div className="artist-page">
@@ -57,6 +60,12 @@ class ArtistPage extends Component {
                                     className="ui red button icon circular">
                                     <i className="minus icon"></i>
                                 </button>
+                                <div class="ui animated button" tabindex="0">
+                                <div class="visible content">Go Back to Main Page</div>
+                                <div class="hidden content" ><Link className="link" to="/"></Link>
+                                <i class="left arrow icon"></i>
+                                </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -70,6 +79,10 @@ class ArtistPage extends Component {
                         />
                         <Form.Button >Submit</Form.Button>
                     </Form>
+
+
+
+
                     <div className="comments-container">
                         <div className="comment-list">
                             {this.renderCommentsList()}

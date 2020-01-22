@@ -1,0 +1,14 @@
+#app {
+    padding: 20px;
+    font-family: 'Avenir LT Std', sans-serif;
+}
+
+.form-group {
+    color: white;
+    background-color: black;
+    position: fixed;
+    z-index: 1;
+    padding: 25px 15px;
+    overflow-y: scroll;
+
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 import '../styles/Artist.css'
+
 import { Grid } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 
@@ -11,10 +12,13 @@ const Artist = (props) => {
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat"
     }
+    
 
     return (
+    
         <Grid.Column>
-            <div className="artist-img" style={imgStyle} >
+            <div className="artist-img" style={imgStyle} title={props.artist.name} onMouseOver={null} >
+    
                 <Link className="link" to={`/artist/${props.artist.id}`}></Link>
             </div>
         </Grid.Column>

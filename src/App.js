@@ -3,7 +3,9 @@ import ArtistContainer from './containers/ArtistContainer';
 import SideBar from './components/SideBar';
 import ArtistPage from './components/ArtistPage';
 import SignUp from './components/SignUp';
+import Login from './components/Login';
 import { Route, Switch } from "react-router";
+import { Link } from 'react-router-dom'
 import './styles/App.css';
 
 class App extends React.Component {
@@ -22,9 +24,9 @@ class App extends React.Component {
     .then(res => res.json())
     .then(artists => this.setState({ artists }));
 
-    fetch("http://localhost:3000/api/users/311")
-    .then(res => res.json())
-    .then(user => this.setState({ user }))
+    // fetch("http://localhost:3000/api/users/311")
+    // .then(res => res.json())
+    // .then(user => this.setState({ user }))
   }
 
   handleCommment = (e) => {
@@ -133,7 +135,7 @@ class App extends React.Component {
                       />
   }
 
-  handleSignUpInputs = (e) => {
+  handleOnChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value
     });
@@ -142,7 +144,8 @@ class App extends React.Component {
   handleCreateUser = () => {
     let username = this.state.username;
     let password = this.state.password;
-    fetch('http://localhost:3000/api/users', {
+
+    fetch('http://localhost:3000/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -154,9 +157,62 @@ class App extends React.Component {
         profile_pic: null
       })
     })
-    .then(r => r.json())
-    .then(newUser => this.setState({user: newUser}))
+    .then(res => res.json())
+    .then(data => {
+      if(data.user.id) {
+        this.setState({ 
+          user: data.user,
+          username: "",
+          password: ""
+        })
+      } else {
+        console.log(data[0])
+      }
+    });
+  }
 
+  handleLogin = () => {
+    let username = this.state.username;
+    let password = this.state.password;
+
+    fetch('http://localhost:3000/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+    },
+      body: JSON.stringify({ username, password })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if(data.user.id) {
+        this.setState({ 
+          user: data.user,
+          username: "",
+          password: ""
+        })
+      } else {
+        console.log(data[0])
+      }
+    });
+  }
+
+  signupPage = () => {
+    return <SignUp 
+              password={this.state.password}
+              username={this.state.username}
+              handleCreateUser={this.handleCreateUser}
+              handleOnChange={this.handleOnChange}
+            />
+  }
+
+  loginPage = () => {
+    return <Login 
+            password={this.state.password}
+            username={this.state.username}
+            handleLogin={this.handleLogin}
+            handleOnChange={this.handleOnChange}
+          />
   }
 
   // renderSideBarUser() {
@@ -174,15 +230,13 @@ class App extends React.Component {
       <div className="App">
           {/* {this.renderSideBarUser()} */}
           
-          <SignUp 
-            password={this.state.password}
-            username={this.state.username}
-            handleCreateUser={this.handleCreateUser}
-            handleSignUpInputs={this.handleSignUpInputs}
-          />
+          <Link to="/signup" >Sign Up</Link>
+          <Link to="/login" >Login</Link>
           
           <Switch>
             <Route exact path="/" render={ this.mainPage }  />
+            <Route path="/signup" render={ this.signupPage } />
+            <Route path="/login" render={ this.loginPage } />
             <Route path="/artist/:id" render={ this.artistPage } />            
           </Switch>
       </div>

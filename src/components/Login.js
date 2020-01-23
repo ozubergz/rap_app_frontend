@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { Button, Form } from 'semantic-ui-react'
 
 
-class SignUp extends Component {
+class Login extends Component {
     render() {
         return (
-            <Form onSubmit={this.props.handleCreateUser}>
-                <h1>Sign Up</h1>
+            
+            <Form onSubmit={this.props.handleLogin}>
+                <h1>Login</h1>
                 <Form.Field>
                     <label>Username</label>
                     <input 
@@ -33,4 +34,4 @@ class SignUp extends Component {
     }
 }
 
-export default SignUp;
+export default Login;

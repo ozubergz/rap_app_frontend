@@ -5,7 +5,9 @@ import ArtistPage from './components/ArtistPage';
 import SignUp from './components/SignUp';
 import Login from './components/Login';
 import { Route, Switch } from "react-router";
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom';
+// import PropTypes from 'prop-types';
+
 import './styles/App.css';
 
 class App extends React.Component {
@@ -16,7 +18,8 @@ class App extends React.Component {
     showComments: false,
     user: null,
     username: "",
-    password: ""
+    password: "",
+    redirect: false
   }
 
   componentDidMount() {
@@ -113,9 +116,9 @@ class App extends React.Component {
     }
   }
 
-  // mainPage = () => {
-  //   return <ArtistContainer artists={this.state.artists} /> 
-  // }
+  mainPage = () => {
+    return <ArtistContainer artists={this.state.artists} /> 
+  }
 
   toggleShowComment = () => {
     this.setState({ showComments: !this.state.showComments})
@@ -124,15 +127,17 @@ class App extends React.Component {
   artistPage = (renderProps) => {
     let id = renderProps.match.params.id;
     let artist = this.state.artists.find(artist => artist.id === Number(id));
-    if(artist) return <ArtistPage 
-                        value={this.state.value}
-                        handleSubmitComment={this.handleSubmitComment}
-                        handleCommment={this.handleCommment} 
-                        handleRemoveArtist={this.handleRemoveArtist}
-                        handleAddArtist={this.handleAddArtist}
-                        artist={artist} 
-                        id={id}
-                      />
+    if(artist) return (
+      <ArtistPage 
+        value={this.state.value}
+        handleSubmitComment={this.handleSubmitComment}
+        handleCommment={this.handleCommment} 
+        handleRemoveArtist={this.handleRemoveArtist}
+        handleAddArtist={this.handleAddArtist}
+        artist={artist} 
+        id={id}
+      />
+    );
   }
 
   handleOnChange = (e) => {
@@ -159,14 +164,15 @@ class App extends React.Component {
     })
     .then(res => res.json())
     .then(data => {
-      if(data.user.id) {
+      if(!data.user) {
+        console.log(data[0])
+      } else {
         this.setState({ 
           user: data.user,
           username: "",
-          password: ""
-        })
-      } else {
-        console.log(data[0])
+          password: "",
+          redirect: true
+        });
       }
     });
   }
@@ -185,54 +191,71 @@ class App extends React.Component {
     })
     .then(res => res.json())
     .then(data => {
-      if(data.user.id) {
+      if(!data.user) {
+        console.log(data.message)
+      } else {
         this.setState({ 
           user: data.user,
           username: "",
-          password: ""
-        })
-      } else {
-        console.log(data[0])
+          password: "",
+          redirect: true
+        });
       }
     });
   }
 
   signupPage = () => {
-    return <SignUp 
-              password={this.state.password}
-              username={this.state.username}
-              handleCreateUser={this.handleCreateUser}
-              handleOnChange={this.handleOnChange}
-            />
+    return (
+      <SignUp 
+        redirect={this.state.redirect}
+        password={this.state.password}
+        username={this.state.username}
+        handleCreateUser={this.handleCreateUser}
+        handleOnChange={this.handleOnChange}
+      />
+    )
   }
 
   loginPage = () => {
-    return <Login 
-            password={this.state.password}
-            username={this.state.username}
-            handleLogin={this.handleLogin}
-            handleOnChange={this.handleOnChange}
-          />
+    return (
+      <Login 
+        redirect={this.state.redirect}
+        password={this.state.password}
+        username={this.state.username}
+        handleLogin={this.handleLogin}
+        handleOnChange={this.handleOnChange}
+      />
+    ) 
   }
 
-  // renderSideBarUser() {
-  //   let user = this.state.user
-  //   if(user) return <SideBar
-  //                     showComments={this.state.showComments}
-  //                     toggleShowComment={this.toggleShowComment}
-  //                     artists={this.state.artists} 
-  //                     user={this.state.user}
-  //                   />
-  // }
+  renderSideBarUser() {
+    let user = this.state.user
+    if(user) {
+      return (
+          <SideBar
+            showComments={this.state.showComments}
+            toggleShowComment={this.toggleShowComment}
+            artists={this.state.artists} 
+            user={this.state.user}
+          />
+      );
+    } else {
+      return (
+        <div className="side-bar">
+            <Link to="/login" >Login</Link>
+              <div>or</div>
+            <Link to="/signup" >Sign Up</Link>
+        </div>
+      )
+      
+    }
+  }
 
   render() {
+    
     return (
       <div className="App">
-          {/* {this.renderSideBarUser()} */}
-          
-          <Link to="/signup" >Sign Up</Link>
-          <Link to="/login" >Login</Link>
-          
+          {this.renderSideBarUser()}
           <Switch>
             <Route exact path="/" render={ this.mainPage }  />
             <Route path="/signup" render={ this.signupPage } />

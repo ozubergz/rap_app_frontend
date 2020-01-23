@@ -57,6 +57,7 @@ class SideBar extends Component {
     }
     
     render() {
+        
         return (
             <div className="side-bar">
                 <div className="user-header">

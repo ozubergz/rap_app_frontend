@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
 import { Button, Form } from 'semantic-ui-react'
+import { Redirect } from 'react-router';
+import '../styles/LoginPage.css'
 
 
 class Login extends Component {
+
+    redirectToMain = () => {
+        // when redirect is true return to main page
+        if(this.props.redirect) {
+            return <Redirect to="/" />
+        }
+    }
+
     render() {
         return (
-            
-            <Form onSubmit={this.props.handleLogin}>
+            <Form className="login-form" onSubmit={this.props.handleLogin}>
                 <h1>Login</h1>
                 <Form.Field>
                     <label>Username</label>
@@ -28,6 +37,7 @@ class Login extends Component {
                         value={this.props.password}
                     />
                 </Form.Field>
+                {this.redirectToMain()}
                 <Button type='submit'>Submit</Button>
             </Form>
         );

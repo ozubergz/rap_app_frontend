@@ -1,11 +1,21 @@
 import React, { Component } from 'react';
-import { Button, Form } from 'semantic-ui-react'
-
+import { Button, Form } from 'semantic-ui-react';
+import { Redirect } from 'react-router';
+import '../styles/SignUpPage.css';
 
 class SignUp extends Component {
+
+    redirectToMain = () => {
+        // when redirect is true return to main page
+        if(this.props.redirect) {
+            return <Redirect to="/" />
+        }
+    }
+
     render() {
+        
         return (
-            <Form onSubmit={this.props.handleCreateUser}>
+            <Form className="signup-form" onSubmit={this.props.handleCreateUser}>
                 <h1>Sign Up</h1>
                 <Form.Field>
                     <label>Username</label>
@@ -27,6 +37,7 @@ class SignUp extends Component {
                         value={this.props.password}
                     />
                 </Form.Field>
+                {this.redirectToMain()}
                 <Button type='submit'>Submit</Button>
             </Form>
         );

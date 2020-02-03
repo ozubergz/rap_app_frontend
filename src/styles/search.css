@@ -1,0 +1,15 @@
+.ui.search {
+    width: 76%;
+    position: absolute;
+    top: 0;
+    padding: 1rem;
+}
+
+.ui.icon.input {
+    width: 4%;
+    transition: width 1.5s;
+}
+
+.ui.icon.input:hover {
+    width: 100%;
+}

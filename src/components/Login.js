@@ -16,7 +16,7 @@ class Login extends Component {
     render() {
         return (
             <Form className="login-form" onSubmit={this.props.handleLogin}>
-                <h1>Login</h1>
+                <h1 style={{color: "green"}}>Login</h1>
                 <Form.Field>
                     <label>Username</label>
                     <input 

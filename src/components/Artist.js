@@ -15,7 +15,10 @@ const Artist = (props) => {
     return (
         <Grid.Column>
             <div className="artist-img" style={imgStyle} >
-                <Link className="link" to={`/artist/${props.artist.id}`}></Link>
+                <Link className="link" to={`/artist/${props.artist.id}`} title={props.artist.name}></Link>
+                <div className="overlay">
+                    <h4>{ props.artist.name}</h4>
+                </div>
             </div>
         </Grid.Column>
     )

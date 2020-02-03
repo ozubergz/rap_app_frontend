@@ -14,9 +14,29 @@
 }
 
 .link {
+    z-index: 1;
     position: absolute;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;    
 }
+
+.overlay {
+    z-index: 0;
+    padding-top: 10px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0; 
+    background-color: rgba(73, 73, 73, 0.705);
+    animation: overlyTransition 1s forwards;
+    color: rgb(54, 192, 54);
+}
+
+@keyframes overlyTransition {
+    from {top: 100% }
+    to { top: 60% }
+}
+
+

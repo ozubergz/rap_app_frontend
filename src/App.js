@@ -5,8 +5,8 @@ import ArtistPage from './components/ArtistPage';
 import SignUp from './components/SignUp';
 import Login from './components/Login';
 import { Route, Switch } from "react-router";
-import { Link, Redirect } from 'react-router-dom';
-// import PropTypes from 'prop-types';
+import LoginSignUp from './components/LoginSignUp';
+// import Search from './components/Search';
 
 import './styles/App.css';
 
@@ -19,7 +19,9 @@ class App extends React.Component {
     user: null,
     username: "",
     password: "",
-    redirect: false
+    redirect: false,
+    searchValue: "",
+    searchResults: null,
   }
 
   componentDidMount() {
@@ -93,7 +95,7 @@ class App extends React.Component {
         user.top_list.push(newFavorite);
         this.setState({ user });
       });
-    }    
+    }
   }
 
   handleRemoveArtist = (artist) => {
@@ -116,8 +118,22 @@ class App extends React.Component {
     }
   }
 
+  handleSearchOnChange = (event) => {
+    this.setState({
+      searchValue: (event.target.value),
+      searchResults: this.state.artists.filter(artist => artist.name.toLowerCase().includes(event.target.value))
+    });
+  }
+
   mainPage = () => {
-    return <ArtistContainer artists={this.state.artists} /> 
+    return (
+      <ArtistContainer 
+        artistsToRender = {!this.state.searchResults ? this.state.artists : this.state.searchResults}
+        artists={this.state.artists} 
+        handleSearchOnChange={this.handleSearchOnChange} 
+        searchValue={this.state.searchValue} 
+      />
+    ) 
   }
 
   toggleShowComment = () => {
@@ -241,21 +257,18 @@ class App extends React.Component {
       );
     } else {
       return (
-        <div className="side-bar">
-            <Link to="/login" >Login</Link>
-              <div>or</div>
-            <Link to="/signup" >Sign Up</Link>
-        </div>
+        <LoginSignUp />
       )
-      
     }
   }
 
+  
+
   render() {
-    
     return (
       <div className="App">
           {this.renderSideBarUser()}
+          
           <Switch>
             <Route exact path="/" render={ this.mainPage }  />
             <Route path="/signup" render={ this.signupPage } />

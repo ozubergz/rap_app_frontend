@@ -16,7 +16,7 @@ class SignUp extends Component {
         
         return (
             <Form className="signup-form" onSubmit={this.props.handleCreateUser}>
-                <h1>Sign Up</h1>
+                <h1 style={{color: "green"}}>Sign Up</h1>
                 <Form.Field>
                     <label>Username</label>
                     <input 

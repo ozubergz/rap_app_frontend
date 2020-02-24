@@ -6,5 +6,6 @@ Website for hip hop enthusiasts to comment about their favorite rappers and add 
 - Used React framework to develop frontend
 - Designed UI with custom CSS, and Semantics UI React
 - Linked repo to backend - https://github.com/ozubergz/rappers_api
+- Demo - (https://vimeo.com/388914034)
 
 <img src="./rap-app.gif" />

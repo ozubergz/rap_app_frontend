@@ -8,25 +8,6 @@ import '../styles/ArtistContainer.css';
 
 class ArtistsContainer extends Component {
 
-    // state = {
-    //     artistId: null,
-    //     hover: false
-    // }
-
-    // hoverOn = (id) => {
-    //     this.setState({ 
-    //         artistId: id,
-    //         hover: true
-    //     });
-    // }
-
-    // hoverOff = () => {
-    //     this.setState({ 
-    //         artistId: null,
-    //         hover: false
-    //     });
-    // }
-
     renderArtistList = () => {
         return this.props.artistsToRender.map(artist => {
            return <Artist key={uuid()} artist={artist} /> 
@@ -34,7 +15,6 @@ class ArtistsContainer extends Component {
     }
 
     render() {
-        // console.log(this.state.hover)
         return (
             <div className="artist-container">
                 <Search 

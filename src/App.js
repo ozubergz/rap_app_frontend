@@ -6,9 +6,9 @@ import SignUp from './components/SignUp';
 import Login from './components/Login';
 import { Route, Switch } from "react-router";
 import LoginSignUp from './components/LoginSignUp';
-// import Search from './components/Search';
-
 import './styles/App.css';
+
+const ROOT_URL = "https://rap-app-api.herokuapp.com";
 
 class App extends React.Component {
 
@@ -25,7 +25,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:3000/api/artists")
+    fetch(`${ROOT_URL}/api/artists`)
     .then(res => res.json())
     .then(artists => this.setState({ artists }));
 
@@ -44,7 +44,7 @@ class App extends React.Component {
     let user_id = this.state.user.id;
 
     if(content.length !== "") {
-      fetch("http://localhost:3000/comments", {
+      fetch(`${ROOT_URL}/comments`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -75,7 +75,7 @@ class App extends React.Component {
     let artistIds = this.state.user.top_list.map(list => list.artist_id);
 
     if(!artistIds.includes(artist_id)) {
-      fetch("http://localhost:3000/top_lists", {
+      fetch(`${ROOT_URL}/top_lists`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
@@ -106,7 +106,7 @@ class App extends React.Component {
     let foundList = topList.find(list => list.artist_id === artist_id);
     
     if(foundList) {
-      fetch(`http://localhost:3000/top_lists/${foundList.id}`, {
+      fetch(`${ROOT_URL}/top_lists/${foundList.id}`, {
         method: "DELETE"
       })
       .then(res => res.json())
@@ -166,7 +166,7 @@ class App extends React.Component {
     let username = this.state.username;
     let password = this.state.password;
 
-    fetch('http://localhost:3000/signup', {
+    fetch(`${ROOT_URL}/signup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -197,7 +197,7 @@ class App extends React.Component {
     let username = this.state.username;
     let password = this.state.password;
 
-    fetch('http://localhost:3000/login', {
+    fetch(`${ROOT_URL}/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

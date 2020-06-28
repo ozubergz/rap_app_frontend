@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/rap_app_frontend/static/css/main.1a44ba34.chunk.css",
+    "main.js": "/rap_app_frontend/static/js/main.03694ea9.chunk.js",
+    "main.js.map": "/rap_app_frontend/static/js/main.03694ea9.chunk.js.map",
+    "runtime-main.js": "/rap_app_frontend/static/js/runtime-main.18683ec6.js",
+    "runtime-main.js.map": "/rap_app_frontend/static/js/runtime-main.18683ec6.js.map",
+    "static/js/2.55515ff0.chunk.js": "/rap_app_frontend/static/js/2.55515ff0.chunk.js",
+    "static/js/2.55515ff0.chunk.js.map": "/rap_app_frontend/static/js/2.55515ff0.chunk.js.map",
+    "index.html": "/rap_app_frontend/index.html",
+    "precache-manifest.48dedf6c518bfa1142dfc2f276873584.js": "/rap_app_frontend/precache-manifest.48dedf6c518bfa1142dfc2f276873584.js",
+    "service-worker.js": "/rap_app_frontend/service-worker.js",
+    "static/css/main.1a44ba34.chunk.css.map": "/rap_app_frontend/static/css/main.1a44ba34.chunk.css.map",
+    "static/js/2.55515ff0.chunk.js.LICENSE.txt": "/rap_app_frontend/static/js/2.55515ff0.chunk.js.LICENSE.txt",
+    "static/media/unknown_pic.png": "/rap_app_frontend/static/media/unknown_pic.4788048f.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.18683ec6.js",
+    "static/js/2.55515ff0.chunk.js",
+    "static/css/main.1a44ba34.chunk.css",
+    "static/js/main.03694ea9.chunk.js"
+  ]
+}

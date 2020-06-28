@@ -1,5 +1,6 @@
 import React from 'react';
 import ArtistContainer from './containers/ArtistContainer';
+import Loader from './components/Loader';
 import SideBar from './components/SideBar';
 import ArtistPage from './components/ArtistPage';
 import SignUp from './components/SignUp';
@@ -126,14 +127,16 @@ class App extends React.Component {
   }
 
   mainPage = () => {
-    return (
-      <ArtistContainer 
+    if(this.state.artists.length !== 0) {
+      return  <ArtistContainer 
         artistsToRender = {!this.state.searchResults ? this.state.artists : this.state.searchResults}
         artists={this.state.artists} 
         handleSearchOnChange={this.handleSearchOnChange} 
         searchValue={this.state.searchValue} 
       />
-    ) 
+    } else {
+      return <Loader />
+    }
   }
 
   toggleShowComment = () => {
